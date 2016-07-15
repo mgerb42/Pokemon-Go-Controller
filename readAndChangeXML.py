@@ -8,7 +8,7 @@ lastLng = ""
 
 def getPokemonLocation():
 	try:
-		response = urllib2.urlopen("http://172.16.255.195/", timeout = 1)
+		response = urllib2.urlopen("http://192.168.1.8/", timeout = 1)
 		return json.load(response)
 	except urllib2.URLError as e:
 		print e.reason
@@ -25,7 +25,8 @@ def generateXML():
 			ET.SubElement(wpt, "name").text = "PokemonLocation"
 			ET.ElementTree(gpx).write("pokemonLocation.gpx")
 			if os.path.isfile("click.applescript"):
-				os.system("osascript click.applescript > /dev/null 2>&1")
+				os.system("osascript click.applescript")
+				print "changing location"
 			print "Location Updated!", "latitude:", geo["lat"], "longitude:" ,geo["lng"]
 
 def start():
